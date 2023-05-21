@@ -16,14 +16,15 @@ export default function Home() {
     value: any
   }>({ label: "Serif", value: serif});
   return (
-    <Container className={fontFamily.value}>
+    <Container className={fontFamily.value}
+      sx={{
+        padding: "30px"
+      }}
+    >
       <header>
         <Flex
           justify="space-between"
           align="center"
-          sx={{
-            padding: "30px"
-          }}
         >
           <Image
             src="/book.png"
@@ -96,6 +97,40 @@ export default function Home() {
                 </ActionIcon>
               }
             />
+          </Flex>
+          <Flex
+            justify="space-between"
+            align="center"
+          >
+            <Flex
+              direction="column"
+            >
+              <Text
+                size={24}
+                weight={600}
+              >
+                hello
+              </Text>
+              <Text
+                size={16}
+              >
+                həˈləʊ
+              </Text>
+            </Flex>
+            <ActionIcon
+              sx={{
+                backgroundColor: Colours.primary,
+                padding: "20px",
+                borderRadius: "50%"
+              }}
+            >
+              <Image
+                src="/icons/play.svg"
+                width={20}
+                height={20}
+                alt="dropdown"
+              />
+            </ActionIcon>
           </Flex>
         </Flex>
       </main>
