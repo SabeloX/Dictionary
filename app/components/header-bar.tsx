@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FontType } from "../page";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import colours from "@/colours";
+import { useMediaQuery } from "@mantine/hooks";
 
 export interface HeaderBarProps {
     fontFamily: FontType;
@@ -11,12 +12,18 @@ export interface HeaderBarProps {
 }
 
 export const HeaderBar = ({ fontFamily, fonts, setFontFamily } : HeaderBarProps) => {
-    const [open, setOpen] = useState<boolean>(false);
-    const [theme, setTheme] = useState<"light" | "dark">("light");
-    return (
-        <header>
+  const [open, setOpen] = useState<boolean>(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const md = useMediaQuery("min-width: 600px");
+  
+  return (
+    <header>
+      <Flex
+        justify="space-between"
+        align="center"
+      >
         <Flex
-          justify="space-between"
+          gap={20}
           align="center"
         >
           <Image
@@ -25,8 +32,18 @@ export const HeaderBar = ({ fontFamily, fonts, setFontFamily } : HeaderBarProps)
             height={80}
             alt="logo"
           />
+          <Text
+            className={fontFamily.value.className}
+            size={34}
+            sx={{
+              display: md ? "block" : "none"
+            }}
+          >
+              Dictionary
+            </Text>
+          </Flex>
           <Flex
-            gap={30}
+            gap={20}
           >
             <Flex
               align="center"
