@@ -61,7 +61,7 @@ export type Words = {
 
 export type ErrorType = {
   message: string;
-  solution: string;
+  resolution: string;
   title: string;
 }
 
@@ -93,10 +93,78 @@ export default function Home() {
             fontFamily={fontFamily}
             setWords={setWords}
           />
-          <SearchResults
-            fontFamily={fontFamily}
-            words={words}
-          />
+          {
+            words.length !== 0 ?
+              <SearchResults
+                fontFamily={fontFamily}
+                words={words}
+              /> :
+              <>
+                {
+                  !error ?
+                  <Flex
+                    direction="column"
+                    gap={40}
+                    align="center"
+                  >
+                    <Text
+                      className={fontFamily.value.className}
+                      size={40}
+                      sx={{
+                        color: Colours.primary
+                      }}
+                    >
+                      DictionaryAPI
+                    </Text>
+                    <Text
+                      className={fontFamily.value.className}
+                      size={30}
+                      sx={{
+                        color: Colours.primary
+                      }}
+                    >
+                      Search the definition of any word.
+                    </Text>
+                  </Flex> :
+                  <Flex
+                    direction="column"
+                    gap={40}
+                      align="center"
+                      sx={{
+                        textAlign: "center"
+                      }}
+                  >
+                    <Text
+                      className={fontFamily.value.className}
+                      size={40}
+                      sx={{
+                        color: Colours.primary
+                      }}
+                    >
+                      {error.title}
+                    </Text>
+                    <Text
+                      className={fontFamily.value.className}
+                      size={30}
+                      sx={{
+                        color: Colours.primary
+                      }}
+                    >
+                      {error.message}
+                    </Text>
+                    <Text
+                      className={fontFamily.value.className}
+                      size={36}
+                      sx={{
+                        color: Colours.primary
+                      }}
+                    >
+                      {error.resolution}
+                    </Text>
+                  </Flex>
+                }
+              </>
+          }
         </Flex>
       </main>
     </Container>

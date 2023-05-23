@@ -21,8 +21,16 @@ export const Search = ({ fontFamily, setWords, setError } : SearchProps) => {
           }
         }
         catch (error: any) {
-          if (error.code === "ERR_BAD_REQUEST"){
+          console.log(error)
+          if (error.code === "ERR_BAD_REQUEST") {
             setError(error.response.data as ErrorType)
+          }
+          else if (error.code == "ERR_NETWORK") {
+            setError({
+              message: "",
+              resolution: "Please turn on your internet connection.",
+              title: error.message
+            })
           }
         }
       }
