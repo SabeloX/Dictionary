@@ -39,22 +39,36 @@ export const SearchResults = ({ words, fontFamily } : SearchResultsProps) => {
                                 size={16}
                                 className={fontFamily.value.className}
                             >
-                                { word.phonetics[0].text }
+                                { word.phonetics[0]?.text }
                             </Text>
                         </Flex>
                         <ActionIcon
                             sx={{
-                                backgroundColor: colours.primary,
+                                border: `1px solid ${colours.primary}`,
                                 padding: "20px",
                                 borderRadius: "50%"
-                            }}
-                        >
-                            <Image
-                                src="/icons/play.svg"
-                                width={20}
-                                height={20}
-                                alt="play"
-                            />
+                                }}
+                                onClick={() => {
+                                    const audio = new Audio(word.phonetics[0]?.audio);
+                                    audio.play();
+                                }}
+                            >
+                                {
+                                    word.phonetics.length === 0 || word.phonetics[0].audio === "" ?
+                                    <Image
+                                        src="/icons/sound-off.svg"
+                                        width={20}
+                                        height={20}
+                                        alt="play"
+                                    /> :
+                                    <Image
+                                        src="/icons/play.svg"
+                                        width={20}
+                                        height={20}
+                                        alt="play"
+                                    />
+                                        
+                                }
                         </ActionIcon>
                     </Flex>
                     <Flex

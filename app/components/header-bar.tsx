@@ -108,7 +108,7 @@ export const HeaderBar = ({ fontFamily, fonts, setFontFamily } : HeaderBarProps)
                 </Popover.Dropdown>
               </Popover>
             </Flex>
-            <Divider orientation='vertical' />
+            {/* <Divider orientation='vertical' />
             <Flex
               align="center"
               gap={5}
@@ -132,7 +132,7 @@ export const HeaderBar = ({ fontFamily, fonts, setFontFamily } : HeaderBarProps)
                   alt="dropdown"
                 />
               </ActionIcon>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
       </header>
