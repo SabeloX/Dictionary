@@ -37,6 +37,7 @@ export const Search = ({ fontFamily, setWords, setError } : SearchProps) => {
                   borderRadius: "20px",
                   backgroundColor: colours.secondary,
                   border: "none",
+                  fontFamily: fontFamily.value.style.fontFamily
                 }
               }}
               sx={{

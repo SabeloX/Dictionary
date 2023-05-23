@@ -26,10 +26,6 @@ const fonts: FontType[] = [
     value: serif
   },
   {
-    label: "Sans Serif",
-    value: sans
-  },
-  {
     label: "Roboto Mono",
     value: robotoMono
   },
@@ -70,7 +66,7 @@ export type ErrorType = {
 }
 
 export default function Home() {
-  const [fontFamily, setFontFamily] = useState<FontType>({ label: "Roboto Mono", value: robotoMono });
+  const [fontFamily, setFontFamily] = useState<FontType>({ label: "Serif", value: serif });
   const [words, setWords] = useState<Words[]>([]);
   const [error, setError] = useState<ErrorType | null>(null);
   useEffect(() => {console.log(words, error)} ,[words])

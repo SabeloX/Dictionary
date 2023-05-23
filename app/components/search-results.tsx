@@ -18,7 +18,8 @@ export const SearchResults = ({ words, fontFamily } : SearchResultsProps) => {
                 words.map((word: Words, index: number) => (
                 <Flex
                     direction="column"
-                    key={index}
+                        key={index}
+                        gap={20}
                 >
                     <Flex
                         justify="space-between"
@@ -28,7 +29,7 @@ export const SearchResults = ({ words, fontFamily } : SearchResultsProps) => {
                             direction="column"
                         >
                             <Text
-                                size={24}
+                                size={26}
                                 weight={600}
                                 className={fontFamily.value.className}
                             >
@@ -65,12 +66,14 @@ export const SearchResults = ({ words, fontFamily } : SearchResultsProps) => {
                         <Flex
                             direction="column"
                             key={index}
+                            gap={10}
                         >
                             <Text
                                 weight={600}
                                 sx={{
                                     fontStyle: "italic"
                                 }}
+                                size={20}
                                 className={fontFamily.value.className}
                             >
                                 {meaning.partOfSpeech}
@@ -101,6 +104,39 @@ export const SearchResults = ({ words, fontFamily } : SearchResultsProps) => {
                         </Flex>
                         ))
                     }
+                    </Flex>
+                    <Flex
+                        direction="column"
+                        gap={10}
+                    >
+                        <Text
+                            className={fontFamily.value.className}
+                        >
+                            Sources
+                        </Text>
+                        <Flex
+                            direction="column"
+                            gap={5}
+                        >
+                            {
+                                word.sourceUrls.map((source, index) => (
+                                    <a
+                                        key={index}
+                                        href={source}
+                                        target="_blank"
+                                    >
+                                        <Text
+                                            className={fontFamily.value.className}
+                                            sx={{
+                                                color: colours.text
+                                            }}
+                                        >
+                                            {source}
+                                        </Text>
+                                    </a>
+                                ))
+                            }
+                        </Flex>
                     </Flex>
                 </Flex>
                 ))
