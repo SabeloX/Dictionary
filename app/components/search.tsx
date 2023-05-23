@@ -1,7 +1,7 @@
 import { ActionIcon, Flex, TextInput } from "@mantine/core"
 import { ErrorType, FontType, Words } from "../page"
 import colours from "@/colours";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 
@@ -13,11 +13,15 @@ export interface SearchProps {
 
 export const Search = ({ fontFamily, setWords, setError } : SearchProps) => {
     const [word, setWord] = useState<string>("");
-    const getResults = async () => {
+  const getResults = async () => {
+      setWords([])
         try {
           if (word !== "") {
             const res = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
             setWords(res.data);
+          }
+          else {
+            setWords([]);
           }
         }
         catch (error: any) {
@@ -35,37 +39,40 @@ export const Search = ({ fontFamily, setWords, setError } : SearchProps) => {
         }
       }
     return (
-        <Flex
-            justify="center"
-        >
-            <TextInput
-              className={fontFamily.value.className}
-              styles={{
-                input: {
-                  borderRadius: "20px",
-                  backgroundColor: colours.secondary,
-                  border: "none",
-                  fontFamily: fontFamily.value.style.fontFamily
-                }
-              }}
-              sx={{
-                width: "100%"
-              }}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setWord(event.target.value)}
-              placeholder='Search a word'
-              rightSection={
-                <ActionIcon
-                  onClick={getResults}
-                >
-                  <Image
-                    src="/icons/search.svg"
-                    width={20}
-                    height={20}
-                    alt="dropdown"
-                  />
-                </ActionIcon>
+      <form
+        onSubmit={(event: FormEvent<HTMLFormElement>) => {
+          event.preventDefault();
+          getResults()
+        }}
+      >
+          <TextInput
+            className={fontFamily.value.className}
+            styles={{
+              input: {
+                borderRadius: "20px",
+                backgroundColor: colours.secondary,
+                border: "none",
+                fontFamily: fontFamily.value.style.fontFamily
               }
-            />
-          </Flex>
+            }}
+            sx={{
+              width: "100%"
+            }}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setWord(event.target.value)}
+            placeholder='Search a word'
+            rightSection={
+              <ActionIcon
+                onClick={getResults}
+              >
+                <Image
+                  src="/icons/search.svg"
+                  width={20}
+                  height={20}
+                  alt="dropdown"
+                />
+              </ActionIcon>
+            }
+          />
+        </form>
     )
 }
